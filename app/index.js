@@ -13,14 +13,17 @@ module.exports = generators.Base.extend({
     return this.prompt([{
       type: 'input',
       name: 'name',
-      message: 'project name?'
+      message: 'project name ?'
     }, {
       type: 'input',
       name: 'description',
-      message: 'project description?'
+      message: 'project description ?',
+      default: ''
     }]).then(function (answers) {
-      mkdirp(answers.name)
-      this.destinationRoot(answers.name)
+      this.name = answers.name
+      this.description = answers.description
+      mkdirp(this.name)
+      this.destinationRoot(this.name)
     }.bind(this))
   },
 
@@ -39,7 +42,10 @@ module.exports = generators.Base.extend({
 
     files: function() {
       ['LICENCE', 'package.json', 'README.md'].forEach(function(file) {
-        this.fs.copy(this.templatePath(file), this.destinationPath(file))
+        this.fs.copyTpl(this.templatePath(file), this.destinationPath(file), {
+          name: this.name,
+          description: this.description
+        })
       }, this)
     }
   },

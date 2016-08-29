@@ -1,3 +1,3 @@
-# react-update
+# <%= name %>
 
-[![build status](https://img.shields.io/travis/jianghai/react-update.svg)](https://travis-ci.org/jianghai/react-update)
+[![build status](https://img.shields.io/travis/jianghai/<%= name %>.svg)](https://travis-ci.org/jianghai/<%= name %>)
